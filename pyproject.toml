@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "msc-misc"
+version = "0.0.1"
+description = "MSc - Physics Miscellaneous"
+authors = ["Juan Esteban Aristizabal <jeaz.git@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "msc_misc"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+StrawberryFields = "^0.23.0"
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.3.0"
+mypy = "^1.1.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
