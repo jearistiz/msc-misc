@@ -1,6 +1,6 @@
 import numpy as np
 import strawberryfields as sf
-from strawberryfields import ops
+from strawberryfields import ops, result
 
 
 def kerr_displace_squeeze_bressanini(
@@ -9,8 +9,6 @@ def kerr_displace_squeeze_bressanini(
     displacement: float = 2,
     kerr_integer: int = 2,
     fock_cutoff_dim: int = 20,
-    x_p_quadratures_limit: float = 10,
-    x_p_number_of_points: int = 200,
 ) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     """Calculates K(x)D(a)S(z)|0>
     Base Reference: Bressanini, 2022 PhysRevA.106.042413
@@ -30,19 +28,5 @@ def kerr_displace_squeeze_bressanini(
             ops.Rgate(XI_BRESSANINI) | q[0]
 
     eng = sf.Engine("fock", backend_options={"cutoff_dim": fock_cutoff_dim})
-    state = eng.run(prog).state
 
-    X = np.linspace(
-        -x_p_quadratures_limit,
-        x_p_quadratures_limit,
-        x_p_number_of_points,
-    )
-    P = np.linspace(
-        -x_p_quadratures_limit,
-        x_p_quadratures_limit,
-        x_p_number_of_points,
-    )
-    Z = state.wigner(0, X, P)
-    X, P = np.meshgrid(X, P)
-
-    return X, P, Z
+    return eng.run(prog)
