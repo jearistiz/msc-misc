@@ -1,3 +1,5 @@
+import datetime
+
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib import collections, figure
@@ -9,6 +11,9 @@ def plot_colormesh(
     Z: np.ndarray,
     plot_limit: float = 10,
     three_d_plot: bool = False,
+    show_plot: bool = True,
+    save_plot: bool = False,
+    plot_name: str = "",
 ) -> None:
     def get_axis(fig: figure.Figure, three_d_plot: bool = False) -> plt.Axes:
         if three_d_plot:
@@ -52,6 +57,15 @@ def plot_colormesh(
     add_labels(ax)
     add_limits(ax)
     fig.colorbar(c, ax=ax)
+    ax.set_aspect(aspect=1, adjustable="box")
+
     # fig.set_size_inches(4.8, 5)
     # ax.set_axis_off()
-    plt.show()
+
+    if save_plot:
+        fig.savefig(plot_name or f"{datetime.datetime.utcnow()}.png")
+
+    if show_plot:
+        plt.show()
+
+    plt.close(fig=fig)

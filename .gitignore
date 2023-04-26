@@ -191,4 +191,5 @@ Temporary Items
 .apdisk
 
 # png images
-.png
+*.png
+*.xcf

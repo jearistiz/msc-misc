@@ -13,11 +13,7 @@ def wigner_samples_from_simulation(
         x_p_limit,
         x_p_number_of_points,
     )
-    P = np.linspace(
-        -x_p_limit,
-        x_p_limit,
-        x_p_number_of_points,
-    )
+    P = X.copy()
 
     assert (
         simulation.state is not None
